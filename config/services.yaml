@@ -12,6 +12,10 @@ services:
   ManiaxAtWork\ContaoGridBundle\GridClasses:
     public: true
 
+  ManiaxAtWork\ContaoGridBundle\Controller\:
+    resource: '../src/Controller/'
+    tags: ['controller.service_arguments']
+
   ManiaxAtWork\ContaoGridBundle\Driver\GridDriver: ~
 
   ManiaxAtWork\ContaoGridBundle\Controller\ContentElement\ColumnStartController: ~
@@ -32,8 +36,3 @@ services:
   ManiaxAtWork\ContaoGridBundle\EventListener\AddGridClassesToContentListener:
     arguments: [ '@request_stack', '@contao.routing.scope_matcher' ]
   ManiaxAtWork\ContaoGridBundle\EventListener\IncludeCssListener: ~
-
-  ManiaxAtWork\ContaoGridBundle\Controller\AjaxController:
-    class: ManiaxAtWork\ContaoGridBundle\Controller\AjaxController
-    public: true
-    arguments: [ '@request_stack', '@contao.routing.scope_matcher' ]
