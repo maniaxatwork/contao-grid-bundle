@@ -26,8 +26,7 @@ class Plugin implements BundlePluginInterface
 
     public function getRouteCollection(LoaderResolverInterface $resolver, KernelInterface $kernel)
     {
-        $path = '@ManiaxatWork/src/Controller';
-
-        return $resolver->resolve($path, 'attribute')->load($path);
+        $file = __DIR__.'/../config/routes.yaml';
+        return $resolver->resolve($file)->load($file);
     }
 }
