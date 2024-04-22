@@ -130,6 +130,6 @@ objButtons.forEach((btn) => {
       let req = "id=" + id + "&class=" + newClass + "&oldclass=" + arrClasses[oldIndex] + "&rt=" + Contao.request_token;
 		//req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=edit&rt=' + Contao.request_token;
 		//href = window.location.href.replace(/\?.*$/, '');
-		new Request.Contao({'url':"/ajaxcolsave?" + req, 'followRedirects':false}).get();
+		new Request.Contao({'url':"/ajaxcolsave?" + req, 'followRedirects':false}).post();
    })
 })
