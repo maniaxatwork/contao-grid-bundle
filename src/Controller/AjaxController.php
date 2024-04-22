@@ -25,14 +25,16 @@ class AjaxController
 
     public function __invoke(Request $request): Response
     {
-        $token = $this->security->getToken();
+      //  $token = $this->security->getToken();
 
-        $itemId = $request->request->get('id');
-        $classes = $request->request->get('class');
-        $oldClass = $request->request->get('oldclass');
-        $objResult = \Database::getInstance()->prepare("SELECT grid_columns FROM tl_content WHERE id=?")->execute($itemId);
+       // $itemId = $request->request->get('id');
+       // $classes = $request->request->get('class');
+       // $oldClass = $request->request->get('oldclass');
+       // $objResult = \Database::getInstance()->prepare("SELECT grid_columns FROM tl_content WHERE id=?")->execute($itemId);
        // $objResult = \Database::getInstance()->prepare("UPDATE tl_content SET grid_columns=? WHERE id=?")->execute($classes, $itemId);
 
-       return new Response(StringUtil::deserialize($objResult));
+       //return new Response(StringUtil::deserialize($objResult));
+
+       return new Response('Hello World!');
     }
 }
