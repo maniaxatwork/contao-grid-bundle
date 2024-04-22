@@ -1,0 +1,112 @@
+:root {
+    --grid-note-bg: rgb(255 255 255 / 80%);
+
+    @media (prefers-color-scheme: dark) {
+        --grid-note-bg: rgb(0 0 0 / 80%);
+    }
+}
+
+html[data-color-scheme=dark] {
+    --grid-note-bg: rgb(27 29 33 / 80%);
+}
+
+.cte_preview{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tl_grid_note {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-transform: initial;
+    color: var(--gray);
+    background: var(--grid-note-bg);
+    padding: 0 0 0 10px;
+}
+
+ul.row,
+ul.colStart{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.row{
+    grid-gap: 0;
+    margin-top: 18px;
+    background: var(--nested-bg);
+    border: 1px solid var(--border);
+    border-width: 0 1px;
+}
+
+ul.colStart{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+li[class*="col-"]{
+    padding: 0 15px;
+}
+
+li.rowStart,
+li.rowEnd{
+    grid-column: span 12 / span 12;
+}
+
+.row .wrapper_start .hover-div,
+.row .wrapper_stop .hover-div{
+    margin-left: -1px;
+    margin-right: -1px;
+}
+
+.as-grid .tl_content.indent_2{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.as-grid .colStart .wrapper_start{
+    padding: 0 0 15px;
+}
+
+.as-grid .rowStart .wrapper_start{
+    margin-top: 0;
+}
+
+.as-grid .colEnd .wrapper_stop{
+    padding: 0;
+}
+
+.as-grid .colStart li:nth-child(2) .tl_content.indent{
+    padding-top: 0;
+}
+
+.as-grid .colStart .wrapper_start .inside{
+    grid-template-columns: 60px auto 1fr;
+}
+
+.grid-buttons{
+    line-height: 16px;
+    background-color: var(--table-header);
+    order: 0;
+    padding: 8px 10px;
+}
+
+.grid-buttons span{
+    opacity:0.7;
+    width: 19px;
+    height: 20px;
+    cursor: pointer;
+    color: #fff;
+    background: var(--green);
+    transition: All 0.3s ease;
+    float: left;
+    text-align: center;
+}
+.grid-buttons span:hover{
+    opacity:1;
+}
+
+.grid-buttons .plus{
+    margin-right: 2px;
+}

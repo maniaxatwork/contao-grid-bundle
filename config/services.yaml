@@ -1,0 +1,33 @@
+
+services:
+  _defaults:
+    autoconfigure: true
+
+  _instanceof:
+    Symfony\Bundle\FrameworkBundle\Controller\AbstractController:
+      calls:
+        - [setContainer, ['@Psr\Container\ContainerInterface']]
+
+  ManiaxAtWork\ContaoGridBundle\GridClasses:
+    public: true
+
+  ManiaxAtWork\ContaoGridBundle\Driver\GridDriver: ~
+
+  ManiaxAtWork\ContaoGridBundle\Controller\ContentElement\ColumnStartController: ~
+  ManiaxAtWork\ContaoGridBundle\Controller\ContentElement\ColumnEndController: ~
+  ManiaxAtWork\ContaoGridBundle\Controller\ContentElement\RowStartController:
+    arguments: ['@ManiaxAtWork\ContaoGridBundle\GridClasses']
+  ManiaxAtWork\ContaoGridBundle\Controller\ContentElement\RowEndController: ~
+
+  ManiaxAtWork\ContaoGridBundle\EventListener\DataContainer\Content: ~
+  ManiaxAtWork\ContaoGridBundle\EventListener\DataContainer\ContentOnLoadCallbackListener: ~
+  ManiaxAtWork\ContaoGridBundle\EventListener\DataContainer\GridClassesOptionsListener:
+    arguments: [ '@ManiaxAtWork\ContaoGridBundle\GridClasses' ]
+  ManiaxAtWork\ContaoGridBundle\EventListener\DataContainer\GridColsOptionsListener:
+    arguments: [ '@ManiaxAtWork\ContaoGridBundle\GridClasses' ]
+  ManiaxAtWork\ContaoGridBundle\EventListener\DataContainer\RegisterFieldsInPaletteListener:
+  ManiaxAtWork\ContaoGridBundle\EventListener\DataContainer\TranslatedLabelsListener: ~
+
+  ManiaxAtWork\ContaoGridBundle\EventListener\AddGridClassesToContentListener:
+    arguments: [ '@request_stack', '@contao.routing.scope_matcher' ]
+  ManiaxAtWork\ContaoGridBundle\EventListener\IncludeCssListener: ~
