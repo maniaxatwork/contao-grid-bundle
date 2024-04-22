@@ -13,7 +13,7 @@ use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use ManiaxAtWork\ContaoGridBundle\ManiaxAtWorkContaoGridBundle;
 
-class Plugin implements BundlePluginInterface
+class Plugin implements BundlePluginInterface, RoutingPluginInterface
 {
 
     public function getBundles(ParserInterface $parser)
@@ -26,7 +26,7 @@ class Plugin implements BundlePluginInterface
 
     public function getRouteCollection(LoaderResolverInterface $resolver, KernelInterface $kernel)
     {
-        $file = __DIR__.'/../config/routes.yaml';
+        $file = __DIR__.'/../../config/routes.yaml';
         return $resolver->resolve($file)->load($file);
     }
 }
