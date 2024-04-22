@@ -116,7 +116,7 @@ objButtons.forEach((btn) => {
 
       id = btn.closest("li").get('id').replace(/li_/, '');
       pid = btn.closest("ul[id*='ul_']").get('id').replace(/ul_/, '');
-      console.log(pid);
+
       const xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
          if (this.readyState == 4 && this.status == 200) {
