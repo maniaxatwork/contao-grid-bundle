@@ -114,10 +114,10 @@ objButtons.forEach((btn) => {
       col.classList.add(newClass);
       col.dataset.cols = newClass;
 
-      id = btn.closest("li").get('id').replace(/li_/, '');
-      pid = btn.closest("ul[id*='ul_']").get('id').replace(/ul_/, '');
+      var id = btn.closest("li").get('id').replace(/li_/, '');
 
       const xhttp = new XMLHttpRequest();
+/*
       xhttp.onreadystatechange = function() {
          if (this.readyState == 4 && this.status == 200) {
            console.log(this.responseText);
@@ -125,10 +125,11 @@ objButtons.forEach((btn) => {
        };
       xhttp.open("POST", "/ajaxcolsave", true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("id=" + id + "&class=" + newClass + "&oldclass=" + arrClasses[oldIndex]);
-
+      xhttp.send("id=" + id + "&class=" + newClass + "&oldclass=" + arrClasses[oldIndex] + "&rt=" + Contao.request_token);
+*/
+      let req = "id=" + id + "&class=" + newClass + "&oldclass=" + arrClasses[oldIndex] + "&rt=" + Contao.request_token;
 		//req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=edit&rt=' + Contao.request_token;
 		//href = window.location.href.replace(/\?.*$/, '');
-		//new Request.Contao({'url':href + req, 'followRedirects':false}).get();
+		new Request.Contao({'url':"/ajaxcolsave?" + req, 'followRedirects':false}).get();
    })
 })
