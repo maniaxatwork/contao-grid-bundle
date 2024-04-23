@@ -24,19 +24,37 @@ class AjaxController
     public function __construct(Security $security)
     {
         $this->security = $security;
-        $this->db = System::getContainer()->get('doctrine.dbal.foo_connection');
+        $this->db = System::getContainer()->get('doctrine.dbal.default_connection');
     }
 
     public function __invoke(Request $request): Response
     {
-       $itemId = $request->query->get('id');
-       $classes = $request->query->get('class');
+        $itemId = $request->query->get('id');
+        $class = $request->query->get('class');
         $oldClass = $request->query->get('oldclass');
-       $objResult = $this->db->prepare("SELECT grid_columns FROM tl_content WHERE id=?")->execute($itemId);
-       //$objResult = \Database::getInstance()->prepare("UPDATE tl_content SET grid_columns=? WHERE id=?")->execute($classes, $itemId);
+        $grid_columns = $this->db->fetchOne("SELECT grid_columns FROM tl_content WHERE id = ?", [$itemId] );
 
-       //return new Response(StringUtil::deserialize($objResult));
+        $gridArr = StringUtil::deserialize($grid_columns);
 
-       return new Response(StringUtil::deserialize($objResult));
+        $gridArr = array_replace($gridArr,
+            array_fill_keys(
+                array_keys($gridArr, $oldClass),
+                $class
+            )
+        );
+
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->update('tl_content')
+            ->set('grid_columns', '?')
+            ->where('id = ?')
+            ->setParameter(0, serialize($gridArr))
+            ->setParameter(0, $itemId)
+        ;
+        //$objResult = \Database::getInstance()->prepare("UPDATE tl_content SET grid_columns=? WHERE id=?")->execute($classes, $itemId);
+
+        //return new Response(StringUtil::deserialize($objResult));
+
+        return new Response(serialize($gridArr));
     }
 }
