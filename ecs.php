@@ -2,18 +2,25 @@
 
 declare(strict_types=1);
 
+use Contao\EasyCodingStandard\Set\SetList;
 use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
+use Symplify\EasyCodingStandard\Config\ECSConfig;
+use Symplify\EasyCodingStandard\ValueObject\Option;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->import(__DIR__.'/vendor/contao/easy-coding-standard/config/contao.php');
-
-    $services = $containerConfigurator->services();
-
-    $services
-        ->set(HeaderCommentFixer::class)
-        ->call('configure', [[
-            'header' => "This file is part of maniaxatwork/contao-grid-bundle.\n\n(c) maniax-at-work.de <https://maniax-at-work.de>\n\n@license MIT",
-        ]])
-    ;
-};
+return ECSConfig::configure()
+    ->withSets([SetList::CONTAO])
+    ->withPaths([
+        __DIR__.'/src',
+    ])
+    ->withSkip([
+        MethodChainingIndentationFixer::class => [
+            '*/DependencyInjection/Configuration.php',
+        ],
+    ])
+    ->withRootFiles()
+    ->withParallel()
+    ->withSpacing(Option::INDENTATION_SPACES, "\n")
+    ->withConfiguredRule(HeaderCommentFixer::class, ['header' => "This file is part of maniaxatwork/contao-grid-bundle.\n\n(c) maniax-at-work.de <https://www.maniax-at-work.de>\n\n@license MIT"])
+    ->withCache(sys_get_temp_dir().'/ecs_cache')
+;
