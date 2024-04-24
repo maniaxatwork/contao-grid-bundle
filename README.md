@@ -1,6 +1,6 @@
 ![Logo von maniax-at-work.de](docs/logo.png?raw=true)
 
-# Grid-Erweiterug für Contao 5
+# Grid-Erweiterung für Contao 5
 Das Bundle dient zur Umsetzung des Grid-Layouts. Bis zu 12 Spalten können verwendet werden.
 
 Das Bundle basiert auf [contao-grid-bundle von erdmann-freunde](https://github.com/erdmannfreunde/contao-grid-bundle)
