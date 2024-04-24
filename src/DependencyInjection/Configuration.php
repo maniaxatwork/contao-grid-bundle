@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of maniaxatwork/contao-grid-bundle.
+ *
+ * (c) maniax-at-work.de <https://www.maniax-at-work.de>
+ *
+ * @license MIT
+ */
+
 namespace ManiaxAtWork\ContaoGridBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -13,7 +21,6 @@ final class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('maniaxatwork_contao_grid');
         $rootNode = $treeBuilder->getRootNode();
-
         $rootNode
             ->children()
                 ->booleanNode('translated_labels')

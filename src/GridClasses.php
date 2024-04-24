@@ -61,7 +61,7 @@ final class GridClasses
      */
     private $options_columns;
 
-    public function __construct(string $rowClass, array $columns, bool $columns_no_column, array $viewports, bool $viewports_no_viewport, array $column_prefixes, ?array $options_prefixes, ?array $pulls, ?array $positioning, ?array $directions, array $options_columns)
+    public function __construct(string $rowClass, array $columns, bool $columns_no_column, array $viewports, bool $viewports_no_viewport, array $column_prefixes, array|null $options_prefixes, array|null $pulls, array|null $positioning, array|null $directions, array $options_columns)
     {
         $this->rowClass = $rowClass;
         $this->columns = $columns;
@@ -106,22 +106,22 @@ final class GridClasses
         return $this->column_prefixes;
     }
 
-    public function getOptionsPrefixes(): ?array
+    public function getOptionsPrefixes(): array|null
     {
         return $this->options_prefixes;
     }
 
-    public function getPulls(): ?array
+    public function getPulls(): array|null
     {
         return $this->pulls;
     }
 
-    public function getPositioning(): ?array
+    public function getPositioning(): array|null
     {
         return $this->positioning;
     }
 
-    public function getDirections(): ?array
+    public function getDirections(): array|null
     {
         return $this->directions;
     }

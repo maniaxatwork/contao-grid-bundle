@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of maniaxatwork/contao-grid-bundle.
+ *
+ * (c) maniax-at-work.de <https://www.maniax-at-work.de>
+ *
+ * @license MIT
+ */
+
 namespace ManiaxAtWork\ContaoGridBundle\EventListener\DataContainer;
 
 use Contao\CoreBundle\ServiceAnnotation\Callback;

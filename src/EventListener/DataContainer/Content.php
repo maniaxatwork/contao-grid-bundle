@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of maniaxatwork/contao-grid-bundle.
+ *
+ * (c) maniax-at-work.de <https://www.maniax-at-work.de>
+ *
+ * @license MIT
+ */
+
 namespace ManiaxAtWork\ContaoGridBundle\EventListener\DataContainer;
 
 use Contao\ContentModel;
@@ -28,10 +36,9 @@ final class Content
                 $data['pid'],
                 $data['ptable'],
                 $data['sorting'],
-                substr($data['type'], 0, 3)
+                substr($data['type'], 0, 3),
             )
         ) {
-
             unset($data['id']);
             $data['type'] = str_replace('Start', 'End', $data['type']);
             ++$data['sorting'];
@@ -52,7 +59,7 @@ final class Content
 
         $statement = Database::getInstance()
             ->prepare(
-                sprintf('SELECT * FROM tl_content WHERE pid=? AND ptable=? AND sorting>? AND type IN("%sStart", "%sEnd") ORDER BY sorting', $rowOrCol, $rowOrCol)
+                sprintf('SELECT * FROM tl_content WHERE pid=? AND ptable=? AND sorting>? AND type IN("%sStart", "%sEnd") ORDER BY sorting', $rowOrCol, $rowOrCol),
             )
             ->limit(1)
             ->execute($pid, $ptable, $sorting)
@@ -68,5 +75,4 @@ final class Content
 
         return false;
     }
-
 }
