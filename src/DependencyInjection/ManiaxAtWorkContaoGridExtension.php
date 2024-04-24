@@ -24,7 +24,6 @@ final class ManiaxAtWorkContaoGridExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
 
         $loader->load('services.yaml');
-        //$loader->load('routes.yaml');
 
         $definition = $container->getDefinition(TranslatedLabelsListener::class);
         $definition->setArgument(0, $config['translated_labels']);

@@ -415,6 +415,18 @@ class GridDriver extends DC_Table
 <ul id="ul_' . $this->intCurrentPid . '">';
 			}
 
+            $beViewports = '
+                    <div id="viewport_panel">
+                        <ul class="buttons">
+                            <li><span>Viewports</span></li>
+                            <li title="XS" class="xs btn" data-viewport="xs"><span>XS</span></li>
+                            <li title="SM" class="sm btn" data-viewport="sm"><span>SM</span></li>
+                            <li title="MD" class="md btn" data-viewport="md"><span>MD</span></li>
+                            <li title="LG" class="lg btn" data-viewport="lg"><span>LG</span></li>
+                            <li title="XL" class="xl btn active" data-viewport="xl"><span>XL</span></li>
+                        </ul>
+                    </div>';
+
 			for ($i=0, $c=\count($row); $i<$c; $i++)
 			{
 				// Improve performance
@@ -433,22 +445,28 @@ class GridDriver extends DC_Table
                     $rowClose = false;
                     $customClasses = "";
 
-                    //dump($row[$i]);
                     if ($row[$i]['type'] == "rowStart"){
-                        $return .= '<li><ul class="row">';
+                        $return .= $beViewports.'<li class="grid" data-viewport="xl"><ul class="row">';
+                        $beViewports = "";
                         $customClasses .= "rowStart";
                     } elseif ($row[$i]['type'] == "rowEnd"){
                         $customClasses .= "rowEnd";
                         $rowClose = true;
                     } elseif($row[$i]['type'] == "colStart"){
                         $colClasses = "";
-                        $desktopCol = "";
+                        $defaultCol = "col-xl-12";
                         $arrColClasses = StringUtil::deserialize($row[$i]['grid_columns']);
                         if ($arrColClasses != null) {
                             $colClasses .= implode(" ", $arrColClasses);
-                            $desktopCol = $arrColClasses[0];
+                            foreach($arrColClasses as $classes){
+                                $pos = strpos($classes, "xl");
+                                if($pos !== false){
+                                    $defaultCol = $classes;
+                                    break;
+                                }
+                            }
                         }
-                        $return .= '<li class="'.$colClasses.'" data-cols="'.$desktopCol.'"><ul class="colStart ">';
+                        $return .= '<li class="'.$colClasses.'" data-cols="'.$defaultCol.'"><ul class="colStart ">';
                     } elseif($row[$i]['type'] == "colEnd"){
                         $customClasses .= "colEnd";
                         $colClose = true;

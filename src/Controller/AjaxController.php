@@ -36,24 +36,27 @@ class AjaxController
 
         $gridArr = StringUtil::deserialize($grid_columns);
 
-        $gridArr = array_replace($gridArr,
-            array_fill_keys(
-                array_keys($gridArr, $oldClass),
-                $class
-            )
-        );
+        if (in_array($oldClass, $gridArr)){
+            $gridArr = array_replace($gridArr,
+                array_fill_keys(
+                    array_keys($gridArr, $oldClass),
+                    $class
+                )
+            );
+        } else{
+            $gridArr[] = $class;
+        }
+
 
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
             ->update('tl_content')
-            ->set('grid_columns', '?')
-            ->where('id = ?')
-            ->setParameter(0, serialize($gridArr))
-            ->setParameter(0, $itemId)
+            ->set('grid_columns', ':gridColumns')
+            ->where('id = :itemId')
+            ->setParameter('gridColumns', serialize($gridArr))
+            ->setParameter('itemId', $itemId)
+            ->execute()
         ;
-        //$objResult = \Database::getInstance()->prepare("UPDATE tl_content SET grid_columns=? WHERE id=?")->execute($classes, $itemId);
-
-        //return new Response(StringUtil::deserialize($objResult));
 
         return new Response(serialize($gridArr));
     }
