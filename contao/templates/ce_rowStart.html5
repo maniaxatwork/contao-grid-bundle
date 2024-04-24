@@ -1,2 +1,2 @@
-
+<?php $GLOBALS['TL_CSS'][] = 'bundles/maniaxatworkcontaogrid/maw_grid.css'; ?>
 <div <?= $this->cssID ?> class="<?php echo $this->rowClass ?> <?php echo $this->class ?>">
